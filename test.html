@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>拼圖</title>
+    <style>
+        .bo{
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            border: 0.5px dashed black;
+        }
+        .Puzzle{
+            width: 100px;
+            height: 100px;
+        }
+        td{
+            width: 100px;
+            height: 100px;
+        }
+        table{
+            border-style: 1px soild black;
+        }
+        .img{
+            background: url('C:/Users/shinesky/Desktop/1506964794-4efdd2f969559e8b1c92e99f32ded48e.jpg');
+        }
+    </style>
+    <script  src="https://code.jquery.com/jquery-3.4.0.min.js"  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="p1" class="Puzzle bo">
+    </div>
+    <div id="p2" class="Puzzle bo" style="margin-left: 100px;">
+    </div>
+    <div id="p3" class="Puzzle bo" style="margin-left: 200px;">
+    </div>
+    <div id="p4" class="Puzzle bo" style="margin-top: 100px;">
+    </div>
+    <div id="p5" class="Puzzle bo" style="margin-top: 100px;margin-left: 100px;">
+    </div>
+    <div id="p6" class="Puzzle bo" style="margin-top: 100px;margin-left: 200px;">
+    </div>
+    <div id="p7" class="Puzzle bo" style="margin-top: 200px;">
+    </div>
+    <div id="p8" class="Puzzle bo" style="margin-top: 200px;margin-left: 100px;">
+    </div>
+    <div id="p9" class="Puzzle bo" style="margin-top: 200px;margin-left: 200px;">
+    </div>
+
+<!--     <div id="1" class="Puzzle" draggable="true" style="padding-top: 350px;">
+        <img id="1" class="img" src="C:/Users/shinesky/Desktop/1506964794-4efdd2f969559e8b1c92e99f32ded48e.jpg" style="position:absolute;clip:rect(0px,100px,100px,0px);">
+    </div> -->
+    <div style="padding-top: 350px;">
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td class="Puzzle"></td>
+                    <td class="Puzzle"></td>
+                    <td class="Puzzle"></td>
+                </tr>
+                <tr>
+                    <td class="Puzzle"></td>
+                    <td class="Puzzle"></td>
+                    <td class="Puzzle"></td>
+                </tr>
+                <tr>
+                    <td class="Puzzle"></td>
+                    <td class="Puzzle"></td>
+                    <td class="Puzzle"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <button onclick="checkPuzzle()">送出</button>
+        <button onclick="resetPuzzle()">重置</button>
+    </div>
+
+    <script type="text/javascript">
+    var drag_obj;
+    var dropzone = document.querySelectorAll(".Puzzle");
+    function resetPuzzle(){
+        var table = document.querySelectorAll("td.Puzzle");
+        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        var result = [];
+        
+        for (var i = 0; i < table.length; i++) {
+            var ran = Math.floor(Math.random() * arr.length);
+            result.push(arr.splice(ran, 1)[0]); //舊陣列去除數字轉移到新陣列
+        }
+        for(var i = 1;i<=table.length;i++){
+            arr.splice(ran, 1)[0];
+            table[i-1].innerHTML = arrPuzzle[result[i-1]-1];
+            dropzone[i-1].innerHTML = "";
+        }
+        // console.log(table);
+    }
+
+    window.onload=function(){
+        resetPuzzle();
+    }
+
+    var arrPuzzle = [
+        "<div id='1' class='img' draggable='true' style='width:100px;height:100px;background-repeat: no-repeat;background-position: 0px 0px'></div>",
+        "<div id='2' class='img' draggable='true' style='width:100px;height:100px;background-repeat: no-repeat;background-position: -100px 0px'></div>",
+        "<div id='3' class='img' draggable='true' style='width:100px;height:100px;background-repeat: no-repeat;background-position: -200px 0px'></div>",
+        "<div id='4' class='img' draggable='true' style='width:100px;height:100px;background-repeat: no-repeat;background-position: 0px -100px'></div>",
+        "<div id='5' class='img' draggable='true' style='width:100px;height:100px;background-repeat: no-repeat;background-position: -100px -100px'></div>",
+        "<div id='6' class='img' draggable='true' style='width:100px;height:100px;background-repeat: no-repeat;background-position: -200px -100px'></div>",
+        "<div id='7' class='img' draggable='true' style='width:100px;height:100px;background-repeat: no-repeat;background-position: 0px -200px'></div>",
+        "<div id='8' class='img' draggable='true' style='width:100px;height:100px;background-repeat: no-repeat;background-position: -100px -200px'></div>",
+        "<div id='9' class='img' draggable='true' style='width:100px;height:100px;background-repeat: no-repeat;background-position: -200px -200px'></div>"
+        ]
+    
+        function checkPuzzle(){
+            var arrimg = document.querySelectorAll(".img");
+            // console.log(arrimg);
+            for(var i = 1;i<=arrimg.length;i++){
+                if(arrimg[i-1].id != i){
+                    alert("你尚未完成拼圖");
+                    break;
+                }else if(arrimg.length == i){
+                    alert("恭喜完成拼圖");
+                }
+            }
+        }
+
+    // console.log(dropzone.length);
+    for (var i = 0; i < dropzone.length; i++) {
+            dropzone[i].ondragstart = function(event){
+            drag_obj = event.target;
+            // console.log(drag_obj);
+            // event.dataTransfer.setDragImage(img, 30, 30);
+        }
+        dropzone[i].ondragover = function(event){
+            event.preventDefault();
+        }
+
+        dropzone[i].ondrop = function(event){
+            event.preventDefault();
+            if(event.target.className == "Puzzle bo" || event.target.className == "Puzzle") {
+                drag_obj.parentNode.removeChild(drag_obj);
+                event.target.appendChild(drag_obj);
+            }
+        }
+    }
+
+    </script>
+  </body>
+</html>  
