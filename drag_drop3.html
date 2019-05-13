@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>drag_drop3</title>
+  <style>
+    #draggable {
+      width: 290px;
+      height: 44px;
+      line-height: 44px;
+      box-sizing: border-box;
+      margin: 0 auto 10px;
+      text-align: center;
+      background: white;
+      cursor: move;
+    }
+
+    .dropzone {
+      border: 1px black dashed;
+      margin: 0 auto 10px;
+      width: 312px;
+      height: 60px;
+      box-sizing: border-box;
+      background: #71BA51;
+      padding: 5px;
+      transition: all 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <div class="dropzone" name="1"> 
+    <div class="dropzone1" id="draggable" draggable="true"> 
+      可拖移物件 
+    </div> 
+  </div> 
+  <div class="dropzone" name="2">
+    <div class="dropzone1" id="draggable" draggable="true">
+      可拖移物件1
+    </div>
+  </div>
+  <div class="dropzone"></div> 
+  <div class="dropzone"></div>
+  <script>
+    var drag_obj;
+    var dropzone = document.querySelectorAll(".dropzone");
+    // 移動物件時的鼠標圖案
+    var img = document.createElement("img");
+      img.src = "C:/Users/shinesky/Desktop/20170923204915_89.png";
+    // 取得區塊數目 
+    for (var i = 0; i < dropzone.length; i++) {
+      dropzone[i].ondragstart = function(event){
+        drag_obj = event.target;
+        // event.dataTransfer.setDragImage(img, 100, 150);
+        // event.dataTransfer.setData("text/plain","16113241 鄒嘉安");
+      }
+
+      dropzone[i].ondragover = function(event){
+        event.preventDefault();
+        event.target.style.backgroundColor = "#71BA51";
+        document.getElementById("draggable").style.backgroundColor = "white";
+      }
+
+      dropzone[i].ondrop = function(event){
+      event.preventDefault();
+        // if(event.target.className == "dropzone" ||event.target.className == "dropzone1") {
+          if(event.target.className == "dropzone") {
+          // console.log(event.target);
+          // console.log(drag_obj);
+          drag_obj.parentNode.removeChild(drag_obj);
+          event.target.appendChild(drag_obj);
+        }else{
+          var a = drag_obj.parentNode;
+          drag_obj.parentNode.removeChild(drag_obj);
+          event.target.parentNode.appendChild(drag_obj);
+          a.appendChild(event.target);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
