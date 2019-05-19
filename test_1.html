@@ -1,156 +1,708 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>拼圖</title>
-    <style>
-        .bo{
-            position: absolute;
-            height: 100px;
-            width: 100px;
-            border: 0.5px dashed black;
-        }
-        .Puzzle{
-            width: 100px;
-            height: 100px;
-        }
-        td{
-            width: 100px;
-            height: 100px;
-        }
-        table{
-            border-style: 1px soild black;
-        }
-        /*.img{
-            background: url('C:/Users/shinesky/Desktop/1506964794-4efdd2f969559e8b1c92e99f32ded48e.jpg');
-        }*/
-    </style>
-    <script  src="https://code.jquery.com/jquery-3.4.0.min.js"  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <div id="p1" class="Puzzle bo">
-    </div>
-    <div id="p2" class="Puzzle bo" style="margin-left: 100px;">
-    </div>
-    <div id="p3" class="Puzzle bo" style="margin-left: 200px;">
-    </div>
-    <div id="p4" class="Puzzle bo" style="margin-top: 100px;">
-    </div>
-    <div id="p5" class="Puzzle bo" style="margin-top: 100px;margin-left: 100px;">
-    </div>
-    <div id="p6" class="Puzzle bo" style="margin-top: 100px;margin-left: 200px;">
-    </div>
-    <div id="p7" class="Puzzle bo" style="margin-top: 200px;">
-    </div>
-    <div id="p8" class="Puzzle bo" style="margin-top: 200px;margin-left: 100px;">
-    </div>
-    <div id="p9" class="Puzzle bo" style="margin-top: 200px;margin-left: 200px;">
-    </div>
+    <head>
+        <meta charset="UTF-8">
+        <title>HTML5網頁程式設計-拼圖</title>
+        <style>
+            .bo3x3{
+                position: absolute;
+                height: 150px;
+                width: 150px;
+                border: 0.5px dashed black;
+            }
+            .bo5x5{
+                position: absolute;
+                height: 90px;
+                width: 90px;
+                border: 0.5px dashed black;
+            }
+            .bo10x10{
+                position: absolute;
+                height: 45px;
+                width: 45px;
+                border: 0.5px dashed black;
+            }
+            /*.Puzzle{
+                width: 100px;
+                height: 100px;
+            */}
+            .navbar-nav.navbar-center {
+                position: absolute;
+                left: 50%;
+                top: 35%;
+                transform: translatex(-50%);
+            }
+            #footer {
+                width:100%;
+                position:absolute;
+                bottom:0;
+                left:0;
+            }
+            #customdiv{
+                /*width:400px;*/
+                /*height: 200px;*/
+/*                border-width: 1px;
+                border-color: black;
+                border-style: solid;*/
+                /*position: fixed;*/
+                /*left:50%;*/
+                /*top: 25%;*/
+                /*transform: translatex(-50%);*/
+                /*display: none;*/
+            }
+            /*.img{
+                background: url('C:/Users/shinesky/Desktop/1506964794-4efdd2f969559e8b1c92e99f32ded48e.jpg');
+            }*/
+            .puz{
+                position: absolute;
+                left:50%;
+                top: 25%;
+                transform: translatex(-50%);
+                border-width: 1px;
+                border-color: black;
+                border-style: solid;
+                width: 450px;
+                height: 450px;
+                margin-top: 80px; 
+            }
+        </style>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.0.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-light">
+        <nav class="navbar navbar-secondary bg-secondary">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><img src="./name.png" height="90px" width="200px" alt=""></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-center" style="color: white;font-size: 25px">
+                        HTML5網頁程式設計期末-拼圖
+                </ul>
+            </div>
+        </nav>
 
-<!--     <div id="1" class="Puzzle" draggable="true" style="padding-top: 350px;">
-        <img id="1" class="img" src="C:/Users/shinesky/Desktop/1506964794-4efdd2f969559e8b1c92e99f32ded48e.jpg" style="position:absolute;clip:rect(0px,100px,100px,0px);">
-    </div> -->
-    <!-- <div style="padding-top: 350px;">
-        <table border="1">
-            <tbody>
-                <tr>
-                    <td class="Puzzle"></td>
-                    <td class="Puzzle"></td>
-                    <td class="Puzzle"></td>
-                </tr>
-                <tr>
-                    <td class="Puzzle"></td>
-                    <td class="Puzzle"></td>
-                    <td class="Puzzle"></td>
-                </tr>
-                <tr>
-                    <td class="Puzzle"></td>
-                    <td class="Puzzle"></td>
-                    <td class="Puzzle"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
-    <div style="padding-top: 350px;">
-        <button onclick="checkPuzzle()">送出</button>
-        <button onclick="resetPuzzle()">重置</button>
-    </div>
+        <br><br><br>
+        <div id="buttokind" align="center">
+            <button type="button" class="btn btn-success" onclick="show3X3()">簡單</button>
+            <button type="button" class="btn btn-warning" onclick="show5X5()">普通</button>
+            <button type="button" class="btn btn-danger" onclick="show10X10()">困難</button>
+            <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#customdiv">自訂</button> -->
+            <button type="button" class="btn btn-secondary" onclick="resetPuzzle()">重置</button>
+        </div>
 
+
+
+    <!-- <div align="center">
+        <input type="file" name="imgupload" id="imgupload" accept="image/png,image/jpeg">
+    </div> -->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="imgupload" name="imgupload" aria-describedby="inputGroupFileAddon01" accept="image/PNG,image/jpeg">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
+    </div>
+    <div class="puz" id="puz3X3" style="display: block;">
+        <div id="p1" class="Puzzle bo3x3">
+        </div>
+        <div id="p2" class="Puzzle bo3x3" style="margin-left: 150px;">
+        </div>
+        <div id="p3" class="Puzzle bo3x3" style="margin-left: 300px;">
+        </div>
+        <div id="p4" class="Puzzle bo3x3" style="margin-top: 150px;">
+        </div>
+        <div id="p5" class="Puzzle bo3x3" style="margin-top: 150px;margin-left: 150px;">
+        </div>
+        <div id="p6" class="Puzzle bo3x3" style="margin-top: 150px;margin-left: 300px;">
+        </div>
+        <div id="p7" class="Puzzle bo3x3" style="margin-top: 300px;">
+        </div>
+        <div id="p8" class="Puzzle bo3x3" style="margin-top: 300px;margin-left: 150px;">
+        </div>
+        <div id="p9" class="Puzzle bo3x3" style="margin-top: 300px;margin-left: 300px;">
+        </div>
+    </div>
+    <div class="puz" id="puz5X5" style="display: none;">
+        <div id="p1" class="Puzzle5X5 bo5x5">
+        </div>
+        <div id="p2" class="Puzzle5X5 bo5x5" style="margin-left: 90px;">
+        </div>
+        <div id="p3" class="Puzzle5X5 bo5x5" style="margin-left: 180px;">
+        </div>
+        <div id="p4" class="Puzzle5X5 bo5x5" style="margin-left: 270px;">
+        </div>
+        <div id="p5" class="Puzzle5X5 bo5x5" style="margin-left: 360px;">
+        </div>
+        <div id="p6" class="Puzzle5X5 bo5x5" style="margin-top: 90px;">
+        </div>
+        <div id="p7" class="Puzzle5X5 bo5x5" style="margin-top: 90px;margin-left: 90px;">
+        </div>
+        <div id="p8" class="Puzzle5X5 bo5x5" style="margin-top: 90px;margin-left: 180px;">
+        </div>
+        <div id="p9" class="Puzzle5X5 bo5x5" style="margin-top: 90px;margin-left: 270px;">
+        </div>
+        <div id="p10" class="Puzzle5X5 bo5x5" style="margin-top: 90px;margin-left: 360px;">
+        </div>
+        <div id="p11" class="Puzzle5X5 bo5x5" style="margin-top: 180px;">
+        </div>
+        <div id="p12" class="Puzzle5X5 bo5x5" style="margin-top: 180px;margin-left: 90px;">
+        </div>
+        <div id="p13" class="Puzzle5X5 bo5x5" style="margin-top: 180px;margin-left: 180px;">
+        </div>
+        <div id="p14" class="Puzzle5X5 bo5x5" style="margin-top: 180px;margin-left: 270px;">
+        </div>
+        <div id="p15" class="Puzzle5X5 bo5x5" style="margin-top: 180px;margin-left: 360px;">
+        </div>
+        <div id="p16" class="Puzzle5X5 bo5x5" style="margin-top: 270px;">
+        </div>
+        <div id="p17" class="Puzzle5X5 bo5x5" style="margin-top: 270px;margin-left: 90px;">
+        </div>
+        <div id="p18" class="Puzzle5X5 bo5x5" style="margin-top: 270px;margin-left: 180px;">
+        </div>
+        <div id="p19" class="Puzzle5X5 bo5x5" style="margin-top: 270px;margin-left: 270px;">
+        </div>
+        <div id="p20" class="Puzzle5X5 bo5x5" style="margin-top: 270px;margin-left: 360px;">
+        </div>
+        <div id="p21" class="Puzzle5X5 bo5x5" style="margin-top: 360px;">
+        </div>
+        <div id="p22" class="Puzzle5X5 bo5x5" style="margin-top: 360px;margin-left: 90px;">
+        </div>
+        <div id="p23" class="Puzzle5X5 bo5x5" style="margin-top: 360px;margin-left: 180px;">
+        </div>
+        <div id="p24" class="Puzzle5X5 bo5x5" style="margin-top: 360px;margin-left: 270px;">
+        </div>
+        <div id="p25" class="Puzzle5X5 bo5x5" style="margin-top: 360px;margin-left: 360px;">
+        </div>
+    </div>
+    <div class="puz" id="puz10X10" style="display: none;">
+        <div id="p1" class="Puzzle10X10 bo10x10">
+        </div>
+        <div id="p2" class="Puzzle10X10 bo10x10" style="margin-left: 45px;">
+        </div>
+        <div id="p3" class="Puzzle10X10 bo10x10" style="margin-left: 90px;">
+        </div>
+        <div id="p4" class="Puzzle10X10 bo10x10" style="margin-left: 135px;">
+        </div>
+        <div id="p5" class="Puzzle10X10 bo10x10" style="margin-left: 180px;">
+        </div>
+        <div id="p6" class="Puzzle10X10 bo10x10" style="margin-left: 225px;">
+        </div>
+        <div id="p7" class="Puzzle10X10 bo10x10" style="margin-left: 270px;">
+        </div>
+        <div id="p8" class="Puzzle10X10 bo10x10" style="margin-left: 315px;">
+        </div>
+        <div id="p9" class="Puzzle10X10 bo10x10" style="margin-left: 360px;">
+        </div>
+        <div id="p10" class="Puzzle10X10 bo10x10" style="margin-left: 405px;">
+        </div>
+        <div id="p11" class="Puzzle10X10 bo10x10" style="margin-top: 45px;">
+        </div>
+        <div id="p12" class="Puzzle10X10 bo10x10" style="margin-top: 45px;margin-left: 45px;">
+        </div>
+        <div id="p13" class="Puzzle10X10 bo10x10" style="margin-top: 45px;margin-left: 90px;">
+        </div>
+        <div id="p14" class="Puzzle10X10 bo10x10" style="margin-top: 45px;margin-left: 135px;">
+        </div>
+        <div id="p15" class="Puzzle10X10 bo10x10" style="margin-top: 45px;margin-left: 180px;">
+        </div>
+        <div id="p16" class="Puzzle10X10 bo10x10" style="margin-top: 45px;margin-left: 225px;">
+        </div>
+        <div id="p17" class="Puzzle10X10 bo10x10" style="margin-top: 45px;margin-left: 270px;">
+        </div>
+        <div id="p18" class="Puzzle10X10 bo10x10" style="margin-top: 45px;margin-left: 315px;">
+        </div>
+        <div id="p19" class="Puzzle10X10 bo10x10" style="margin-top: 45px;margin-left: 360px;">
+        </div>
+        <div id="p20" class="Puzzle10X10 bo10x10" style="margin-top: 45px;margin-left: 405px;">
+        </div>
+        <div id="p21" class="Puzzle10X10 bo10x10" style="margin-top: 90px;">
+        </div>
+        <div id="p22" class="Puzzle10X10 bo10x10" style="margin-top: 90px;margin-left: 45px;">
+        </div>
+        <div id="p23" class="Puzzle10X10 bo10x10" style="margin-top: 90px;margin-left: 90px;">
+        </div>
+        <div id="p24" class="Puzzle10X10 bo10x10" style="margin-top: 90px;margin-left: 135px;">
+        </div>
+        <div id="p25" class="Puzzle10X10 bo10x10" style="margin-top: 90px;margin-left: 180px;">
+        </div>
+        <div id="p26" class="Puzzle10X10 bo10x10" style="margin-top: 90px;margin-left: 225px;">
+        </div>
+        <div id="p27" class="Puzzle10X10 bo10x10" style="margin-top: 90px;margin-left: 270px;">
+        </div>
+        <div id="p28" class="Puzzle10X10 bo10x10" style="margin-top: 90px;margin-left: 315px;">
+        </div>
+        <div id="p29" class="Puzzle10X10 bo10x10" style="margin-top: 90px;margin-left: 360px;">
+        </div>
+        <div id="p30" class="Puzzle10X10 bo10x10" style="margin-top: 90px;margin-left: 405px;">
+        </div>
+        <div id="p31" class="Puzzle10X10 bo10x10" style="margin-top: 135px;">
+        </div>
+        <div id="p32" class="Puzzle10X10 bo10x10" style="margin-top: 135px;margin-left: 45px;">
+        </div>
+        <div id="p33" class="Puzzle10X10 bo10x10" style="margin-top: 135px;margin-left: 90px;">
+        </div>
+        <div id="p34" class="Puzzle10X10 bo10x10" style="margin-top: 135px;margin-left: 135px;">
+        </div>
+        <div id="p35" class="Puzzle10X10 bo10x10" style="margin-top: 135px;margin-left: 180px;">
+        </div>
+        <div id="p36" class="Puzzle10X10 bo10x10" style="margin-top: 135px;margin-left: 225px;">
+        </div>
+        <div id="p37" class="Puzzle10X10 bo10x10" style="margin-top: 135px;margin-left: 270px;">
+        </div>
+        <div id="p38" class="Puzzle10X10 bo10x10" style="margin-top: 135px;margin-left: 315px;">
+        </div>
+        <div id="p39" class="Puzzle10X10 bo10x10" style="margin-top: 135px;margin-left: 360px;">
+        </div>
+        <div id="p40" class="Puzzle10X10 bo10x10" style="margin-top: 135px;margin-left: 405px;">
+        </div>
+        <div id="p41" class="Puzzle10X10 bo10x10" style="margin-top: 180px;">
+        </div>
+        <div id="p42" class="Puzzle10X10 bo10x10" style="margin-top: 180px;margin-left: 45px;">
+        </div>
+        <div id="p43" class="Puzzle10X10 bo10x10" style="margin-top: 180px;margin-left: 90px;">
+        </div>
+        <div id="p44" class="Puzzle10X10 bo10x10" style="margin-top: 180px;margin-left: 135px;">
+        </div>
+        <div id="p45" class="Puzzle10X10 bo10x10" style="margin-top: 180px;margin-left: 180px;">
+        </div>
+        <div id="p46" class="Puzzle10X10 bo10x10" style="margin-top: 180px;margin-left: 225px;">
+        </div>
+        <div id="p47" class="Puzzle10X10 bo10x10" style="margin-top: 180px;margin-left: 270px;">
+        </div>
+        <div id="p48" class="Puzzle10X10 bo10x10" style="margin-top: 180px;margin-left: 315px;">
+        </div>
+        <div id="p49" class="Puzzle10X10 bo10x10" style="margin-top: 180px;margin-left: 360px;">
+        </div>
+        <div id="p50" class="Puzzle10X10 bo10x10" style="margin-top: 180px;margin-left: 405px;">
+        </div>
+        <div id="p51" class="Puzzle10X10 bo10x10" style="margin-top: 225px;">
+        </div>
+        <div id="p52" class="Puzzle10X10 bo10x10" style="margin-top: 225px;margin-left: 45px;">
+        </div>
+        <div id="p53" class="Puzzle10X10 bo10x10" style="margin-top: 225px;margin-left: 90px;">
+        </div>
+        <div id="p54" class="Puzzle10X10 bo10x10" style="margin-top: 225px;margin-left: 135px;">
+        </div>
+        <div id="p55" class="Puzzle10X10 bo10x10" style="margin-top: 225px;margin-left: 180px;">
+        </div>
+        <div id="p56" class="Puzzle10X10 bo10x10" style="margin-top: 225px;margin-left: 225px;">
+        </div>
+        <div id="p57" class="Puzzle10X10 bo10x10" style="margin-top: 225px;margin-left: 270px;">
+        </div>
+        <div id="p58" class="Puzzle10X10 bo10x10" style="margin-top: 225px;margin-left: 315px;">
+        </div>
+        <div id="p59" class="Puzzle10X10 bo10x10" style="margin-top: 225px;margin-left: 360px;">
+        </div>
+        <div id="p60" class="Puzzle10X10 bo10x10" style="margin-top: 225px;margin-left: 405px;">
+        </div>
+        <div id="p61" class="Puzzle10X10 bo10x10" style="margin-top: 270px;">
+        </div>
+        <div id="p62" class="Puzzle10X10 bo10x10" style="margin-top: 270px;margin-left: 45px;">
+        </div>
+        <div id="p63" class="Puzzle10X10 bo10x10" style="margin-top: 270px;margin-left: 90px;">
+        </div>
+        <div id="p64" class="Puzzle10X10 bo10x10" style="margin-top: 270px;margin-left: 135px;">
+        </div>
+        <div id="p65" class="Puzzle10X10 bo10x10" style="margin-top: 270px;margin-left: 180px;">
+        </div>
+        <div id="p66" class="Puzzle10X10 bo10x10" style="margin-top: 270px;margin-left: 225px;">
+        </div>
+        <div id="p67" class="Puzzle10X10 bo10x10" style="margin-top: 270px;margin-left: 270px;">
+        </div>
+        <div id="p68" class="Puzzle10X10 bo10x10" style="margin-top: 270px;margin-left: 315px;">
+        </div>
+        <div id="p69" class="Puzzle10X10 bo10x10" style="margin-top: 270px;margin-left: 360px;">
+        </div>
+        <div id="p70" class="Puzzle10X10 bo10x10" style="margin-top: 270px;margin-left: 405px;">
+        </div>
+        <div id="p71" class="Puzzle10X10 bo10x10" style="margin-top: 315px;">
+        </div>
+        <div id="p72" class="Puzzle10X10 bo10x10" style="margin-top: 315px;margin-left: 45px;">
+        </div>
+        <div id="p73" class="Puzzle10X10 bo10x10" style="margin-top: 315px;margin-left: 90px;">
+        </div>
+        <div id="p74" class="Puzzle10X10 bo10x10" style="margin-top: 315px;margin-left: 135px;">
+        </div>
+        <div id="p75" class="Puzzle10X10 bo10x10" style="margin-top: 315px;margin-left: 180px;">
+        </div>
+        <div id="p76" class="Puzzle10X10 bo10x10" style="margin-top: 315px;margin-left: 225px;">
+        </div>
+        <div id="p77" class="Puzzle10X10 bo10x10" style="margin-top: 315px;margin-left: 270px;">
+        </div>
+        <div id="p78" class="Puzzle10X10 bo10x10" style="margin-top: 315px;margin-left: 315px;">
+        </div>
+        <div id="p79" class="Puzzle10X10 bo10x10" style="margin-top: 315px;margin-left: 360px;">
+        </div>
+        <div id="p80" class="Puzzle10X10 bo10x10" style="margin-top: 315px;margin-left: 405px;">
+        </div>
+        <div id="p81" class="Puzzle10X10 bo10x10" style="margin-top: 360px;">
+        </div>
+        <div id="p82" class="Puzzle10X10 bo10x10" style="margin-top: 360px;margin-left: 45px;">
+        </div>
+        <div id="p83" class="Puzzle10X10 bo10x10" style="margin-top: 360px;margin-left: 90px;">
+        </div>
+        <div id="p84" class="Puzzle10X10 bo10x10" style="margin-top: 360px;margin-left: 135px;">
+        </div>
+        <div id="p85" class="Puzzle10X10 bo10x10" style="margin-top: 360px;margin-left: 180px;">
+        </div>
+        <div id="p86" class="Puzzle10X10 bo10x10" style="margin-top: 360px;margin-left: 225px;">
+        </div>
+        <div id="p87" class="Puzzle10X10 bo10x10" style="margin-top: 360px;margin-left: 270px;">
+        </div>
+        <div id="p88" class="Puzzle10X10 bo10x10" style="margin-top: 360px;margin-left: 315px;">
+        </div>
+        <div id="p89" class="Puzzle10X10 bo10x10" style="margin-top: 360px;margin-left: 360px;">
+        </div>
+        <div id="p90" class="Puzzle10X10 bo10x10" style="margin-top: 360px;margin-left: 405px;">
+        </div>
+        <div id="p91" class="Puzzle10X10 bo10x10" style="margin-top: 405px;">
+        </div>
+        <div id="p92" class="Puzzle10X10 bo10x10" style="margin-top: 405px;margin-left: 45px;">
+        </div>
+        <div id="p93" class="Puzzle10X10 bo10x10" style="margin-top: 405px;margin-left: 90px;">
+        </div>
+        <div id="p94" class="Puzzle10X10 bo10x10" style="margin-top: 405px;margin-left: 135px;">
+        </div>
+        <div id="p95" class="Puzzle10X10 bo10x10" style="margin-top: 405px;margin-left: 180px;">
+        </div>
+        <div id="p96" class="Puzzle10X10 bo10x10" style="margin-top: 405px;margin-left: 225px;">
+        </div>
+        <div id="p97" class="Puzzle10X10 bo10x10" style="margin-top: 405px;margin-left: 270px;">
+        </div>
+        <div id="p98" class="Puzzle10X10 bo10x10" style="margin-top: 405px;margin-left: 315px;">
+        </div>
+        <div id="p99" class="Puzzle10X10 bo10x10" style="margin-top: 405px;margin-left: 360px;">
+        </div>
+        <div id="p100" class="Puzzle10X10 bo10x10" style="margin-top: 405px;margin-left: 405px;">
+        </div>
+    </div>
+    <!-- <div id="customdiv" class="dropdown-menu p-4 text-muted">
+        123
+    </div> -->
+
+<!-- Modal -->
+<!--     <div class="modal fade" id="customdiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">自訂 - X*X方形拼圖</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body">
+            <div align="left">
+                <a>請輸入數字：</a>
+                <input type="number" name="puznumber" min="2" max="10" required="required">
+                <br>
+                <a>可選擇自己要的拼圖圖片或是不選擇使用預設圖片</a>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="imgupload" name="imgupload" aria-describedby="inputGroupFileAddon01" accept="image/PNG,image/jpeg">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+                <br>
+                <a></a>
+                <img id="customdivimg" width="466px" height="466px" style="display: none;">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+            <button type="button" class="btn btn-primary">確定</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+    <footer class="page-footer navbar-secondary bg-secondary" id="footer" style="color: white">
+        <div class="footer-copyright text-center py-3">HTML5網頁程式設計期末專題：
+            <span>16113241 鄒嘉安</span>
+        </div>
+    </footer>
     <script type="text/javascript">
+
     var drag_obj;
-    var dropzone = document.querySelectorAll(".Puzzle");
+    // var dropzone = document.querySelectorAll(".Puzzle");
+    var size = 3;
+    var arr = [];
+    // for(var i = 1;i <= size*size;i++){
+    //         arr[i-1] = i;
+    // }
+    //重置拼圖
     function resetPuzzle(){
-        // var table = document.querySelectorAll("td.Puzzle");
-        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        for(var i = 1;i <= size*size;i++){
+            arr[i-1] = i;
+        }
         var result = [];
-        
-        for (var i = 0; i < dropzone.length; i++) {
+        for (var i = 0; i < size*size; i++) {
             var ran = Math.floor(Math.random() * arr.length);
             result.push(arr.splice(ran, 1)[0]); //舊陣列去除數字轉移到新陣列
         }
-        for(var i = 1;i<=dropzone.length;i++){
-            arr.splice(ran, 1)[0];
-            dropzone[i-1].innerHTML = arrPuzzle[result[i-1]-1];
-            // dropzone[i-1].innerHTML = "";
-        }
-        // console.log(table);
-    }
-    window.onload=function(){
-        resetPuzzle();
-    }
-    var imgurl = "background: url('C://Users//shinesky//Desktop//1506964794-4efdd2f969559e8b1c92e99f32ded48e.jpg');";
-    var arrPuzzle = [
-        "<div id='1' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: 0px 0px\"'></div>",
-        "<div id='2' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -100px 0px\"'></div>",
-        "<div id='3' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -200px 0px\"'></div>",
-        "<div id='4' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: 0px -100px\"'></div>",
-        "<div id='5' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -100px -100px\"'></div>",
-        "<div id='6' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -200px -100px\"'></div>",
-        "<div id='7' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: 0px -200px\"'></div>",
-        "<div id='8' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -100px -200px\"'></div>",
-        "<div id='9' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -200px -200px\"'></div>"
-        ]
-    
-        function checkPuzzle(){
-            var arrimg = document.querySelectorAll(".img");
-            // console.log(arrimg);
-            for(var i = 1;i<=arrimg.length;i++){
-                if(arrimg[i-1].id != i){
-                    alert("你尚未完成拼圖");
-                    break;
-                }else if(arrimg.length == i){
-                    alert("恭喜完成拼圖");
-                }
+        if(size == 3){
+            var dropzone = document.querySelectorAll(".Puzzle");
+            for(var i = 1;i<=size*size;i++){
+                arr.splice(ran, 1)[0];
+                dropzone[i-1].innerHTML = arrPuzzle3X3[result[i-1]-1];
+                // dropzone[i-1].innerHTML = "";
             }
-        }
-    // console.log(dropzone.length);
-    for (var i = 0; i < dropzone.length; i++) {
+            for (var i = 0; i < dropzone.length; i++) {
             dropzone[i].ondragstart = function(event){
             drag_obj = event.target;
             // console.log(drag_obj);
             // event.dataTransfer.setDragImage(img, 30, 30);
-        }
-        dropzone[i].ondragover = function(event){
-            event.preventDefault();
-        }
-        dropzone[i].ondrop = function(event){
-            event.preventDefault();
-            // if(event.target.className == "Puzzle bo") {
-            //     drag_obj.parentNode.removeChild(drag_obj);
-            //     event.target.appendChild(drag_obj);
-            // }else if(event.target.className == "img"){
-            //     var a = drag_obj.parentNode;
-            //   drag_obj.parentNode.removeChild(drag_obj);
-            //   event.target.parentNode.appendChild(drag_obj);
-            //   a.appendChild(event.target);
-            // }
-            if(event.target.className == "img" && drag_obj.parentNode != event.target.parentNode) {;
-              var a = drag_obj.parentNode;
-              drag_obj.parentNode.removeChild(drag_obj);
-              event.target.parentNode.appendChild(drag_obj);
-              a.appendChild(event.target);
+            }
+            dropzone[i].ondragover = function(event){
+                event.preventDefault();
+            }
+            dropzone[i].ondrop = function(event){
+                event.preventDefault();
+                if(event.target.className == "img" && drag_obj.parentNode != event.target.parentNode) {
+                    var a = drag_obj.parentNode;
+                    drag_obj.parentNode.removeChild(drag_obj);
+                    event.target.parentNode.appendChild(drag_obj);
+                    a.appendChild(event.target);
+                    checkPuzzle();
+                }
             }
         }
+        }else if(size == 5){
+            dropzone = document.querySelectorAll(".Puzzle5X5");
+            for(var i = 1;i<=size*size;i++){
+                arr.splice(ran, 1)[0];
+                // console.log(dropzone[i-1].innerHTML);
+                dropzone[i-1].innerHTML = arrPuzzle5X5[result[i-1]-1];
+                // dropzone[i-1].innerHTML = "";
+            }
+            for (var i = 0; i < dropzone.length; i++) {
+                dropzone[i].ondragstart = function(event){
+                drag_obj = event.target;
+            // console.log(drag_obj);
+            // event.dataTransfer.setDragImage(img, 30, 30);
+                }
+                dropzone[i].ondragover = function(event){
+                    event.preventDefault();
+                }
+                dropzone[i].ondrop = function(event){
+                    event.preventDefault();
+                    if(event.target.className == "img" && drag_obj.parentNode != event.target.parentNode) {
+                        var a = drag_obj.parentNode;
+                        drag_obj.parentNode.removeChild(drag_obj);
+                        event.target.parentNode.appendChild(drag_obj);
+                        a.appendChild(event.target);
+                        checkPuzzle();
+                    }
+                }
+            }
+            // console.log(dropzone);
+        }else if(size == 10){
+            dropzone = document.querySelectorAll(".Puzzle10X10");
+            for(var i = 1;i<=size*size;i++){
+                arr.splice(ran, 1)[0];
+                // console.log(dropzone[i-1].innerHTML);
+                dropzone[i-1].innerHTML = arrPuzzle10X10[result[i-1]-1];
+                // dropzone[i-1].innerHTML = "";
+            }
+            for (var i = 0; i < dropzone.length; i++) {
+                dropzone[i].ondragstart = function(event){
+                drag_obj = event.target;
+            // console.log(drag_obj);
+            // event.dataTransfer.setDragImage(img, 30, 30);
+                }
+                dropzone[i].ondragover = function(event){
+                    event.preventDefault();
+                }
+                dropzone[i].ondrop = function(event){
+                    event.preventDefault();
+                    if(event.target.className == "img" && drag_obj.parentNode != event.target.parentNode) {
+                        var a = drag_obj.parentNode;
+                        drag_obj.parentNode.removeChild(drag_obj);
+                        event.target.parentNode.appendChild(drag_obj);
+                        a.appendChild(event.target);
+                        checkPuzzle();
+                    }
+                }
+            }
+        }
+        // var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        
+        // console.log(table);
+    }
+
+
+    //讀取後打亂拼圖
+    window.onload=function(){
+        resetPuzzle();
+    }
+    var puz3X3w = ["0px","-150px","-300px"];
+    var puz3X3h = ["0px","-150px","-300px"];
+    var puz5X5w = ["0px","-90px","-180px","-270px","-360px"];
+    var puz5X5h = ["0px","-90px","-180px","-270px","-360px"];
+    var puz10X10w = ["0px","-45px","-90px","-135px","-180px","-225px","-270px","-315px","-360px","-405px"];
+    var puz10X10h = ["0px","-45px","-90px","-135px","-180px","-225px","-270px","-315px","-360px","-405px"];
+    var arrPuzzle3X3 = [];
+    var arrPuzzle5X5 = [];
+    var arrPuzzle10X10 = [];
+    var imgurl = "background: url('C://Users//shinesky//Desktop//1506964794-4efdd2f969559e8b1c92e99f32ded48e.jpg');";
+
+    for(var puz = 0,puzw = 0,puzh = 0;puz<9;puz++){
+        arrPuzzle3X3[puz] = "<div id='"+puz+"' class='img' draggable='true' style=\""+imgurl+"width:150px;height:150px;background-repeat: no-repeat;background-position:"+puz3X3w[puzw]+" "+puz3X3h[puzh]+"\"'></div>";
+        // console.log(puzw);
+        if(puzw == 2){
+            puzh++;
+        }
+        if(puzw != 2){
+            puzw++;
+        }else{
+            puzw = 0;
+        }
+    }
+    for(var puz = 0,puzw = 0,puzh = 0;puz<25;puz++){
+        arrPuzzle5X5[puz] = "<div id='"+puz+"' class='img' draggable='true' style=\""+imgurl+"width:90px;height:90px;background-repeat: no-repeat;background-position:"+puz5X5w[puzw]+" "+puz5X5h[puzh]+"\"'></div>";
+        // console.log(puzw);
+        if(puzw == 4){
+            puzh++;
+        }
+        if(puzw != 4){
+            puzw++;
+        }else{
+            puzw = 0;
+        }
+    }
+    for(var puz = 0,puzw = 0,puzh = 0;puz<100;puz++){
+        arrPuzzle10X10[puz] = "<div id='"+puz+"' class='img' draggable='true' style=\""+imgurl+"width:45px;height:45px;background-repeat: no-repeat;background-position:"+puz10X10w[puzw]+" "+puz10X10h[puzh]+"\"'></div>";
+        // console.log(puzw);
+        if(puzw == 9){
+            puzh++;
+        }
+        if(puzw != 9){
+            puzw++;
+        }else{
+            puzw = 0;
+        }
+    }
+
+
+    // var arrPuzzle = [
+    //     "<div id='0' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: 0px 0px\"'></div>",
+    //     "<div id='1' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -100px 0px\"'></div>",
+    //     "<div id='2' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -200px 0px\"'></div>",
+    //     "<div id='3' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: 0px -100px\"'></div>",
+    //     "<div id='4' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -100px -100px\"'></div>",
+    //     "<div id='5' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -200px -100px\"'></div>",
+    //     "<div id='6' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: 0px -200px\"'></div>",
+    //     "<div id='7' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -100px -200px\"'></div>",
+    //     "<div id='8' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -200px -200px\"'></div>"
+    //     ]
+    
+    function checkPuzzle(){
+        // var arrimg = document.querySelectorAll(".img");
+        // console.log(arrimg);
+        if(size == 3){
+            var arrimg = document.querySelectorAll(".Puzzle");
+            // console.log(document.querySelectorAll(".Puzzle"));
+            // console.log(arrimg[1].childNodes[0].id)
+        }else if(size == 5){
+            arrimg = document.querySelectorAll(".Puzzle5X5");
+        }else if(size == 10){
+
+        }
+        for(var i = 0;i<size*size;i++){
+            // console.log(arrimg[i].id);
+            // console.log(i);
+            // console.log("-----------");
+            if(arrimg[i].childNodes[0].id != i){
+                break;
+            }else if(arrimg.length-1 == i){
+                alert("恭喜完成拼圖");
+            }
+        }
+    }
+    // console.log(dropzone.length);
+    // for (var i = 0; i < dropzone.length; i++) {
+    //         dropzone[i].ondragstart = function(event){
+    //         drag_obj = event.target;
+    //         // console.log(drag_obj);
+    //         // event.dataTransfer.setDragImage(img, 30, 30);
+    //     }
+    //     dropzone[i].ondragover = function(event){
+    //         event.preventDefault();
+    //     }
+    //     dropzone[i].ondrop = function(event){
+    //         event.preventDefault();
+    //         if(event.target.className == "img" && drag_obj.parentNode != event.target.parentNode) {
+    //             var a = drag_obj.parentNode;
+    //             drag_obj.parentNode.removeChild(drag_obj);
+    //             event.target.parentNode.appendChild(drag_obj);
+    //             a.appendChild(event.target);
+    //             checkPuzzle();
+    //         }
+    //     }
+    // }
+
+    //顯示出customdiv
+    // function showcustomdiv(){
+    //     $("#customdiv").show();
+    // }
+
+    //check上傳格式是不是圖片格式
+    $(".custom-file-input").on("change", function() {
+        // console.log($(this)[0].files[0]);
+        var imagearray = new Array(".jpg", ".png");
+        var file_content = $(this).val();//取檔案名
+        file_content = file_content.substring(file_content.lastIndexOf('.'));
+        // console.log(file_content);
+        if(!!file_content){
+            if(imagearray.indexOf(file_content) < 0){
+                alert("檔案類型錯誤，只接受"+imagearray.toString());
+                $(this).siblings(".custom-file-label").addClass("selected").html("Choose file");
+                $('#customdivimg').attr("style","display:none");
+            }else{
+                // alert("讀取成功");
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                var file = $(this)[0].files[0];
+                var reader = new FileReader;
+                reader.onload = function(e) {
+                    $('#customdivimg').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(file);
+                $('#customdivimg').attr("style","display:block");
+            }
+        }
+        // console.log($(this).val());
+    });
+
+    function show3X3(){
+        $('#puz3X3').attr("style","display:block");
+        $('#puz5X5').attr("style","display:none");
+        $('#puz10X10').attr("style","display:none");
+        size = 3;
+        resetPuzzle();
+    }
+
+    function show5X5(){
+        $('#puz3X3').attr("style","display:none");
+        $('#puz5X5').attr("style","display:block");
+        $('#puz10X10').attr("style","display:none");
+        size = 5;
+        resetPuzzle();
+    }
+
+    function show10X10(){
+        $('#puz3X3').attr("style","display:none");
+        $('#puz5X5').attr("style","display:none");
+        $('#puz10X10').attr("style","display:block");
+        size = 10;
+        resetPuzzle();
     }
     </script>
   </body>
