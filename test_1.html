@@ -32,12 +32,13 @@
                 top: 35%;
                 transform: translatex(-50%);
             }
-            #footer {
+/*            #footer {
                 width:100%;
+                height: 50px;
                 position:absolute;
-                bottom:0;
+                bottom:-30%;
                 left:0;
-            }
+            }*/
             #customdiv{
                 /*width:400px;*/
                 /*height: 200px;*/
@@ -56,7 +57,7 @@
             .puz{
                 position: absolute;
                 left:50%;
-                top: 25%;
+                top: 10%;
                 transform: translatex(-50%);
                 border-width: 1px;
                 border-color: black;
@@ -65,12 +66,23 @@
                 height: 450px;
                 margin-top: 80px; 
             }
+
+            .testdiv{
+                background: url('.//1506964794-4efdd2f969559e8b1c92e99f32ded48e - 複製.jpg');
+                width: 150px;
+                height: 150px;
+                background-repeat: no-repeat;
+/*                -moz-background-size:contain;
+                -webkit-background-size:contain;
+                -o-background-size:contain;*/
+                background-size:450px 450px;
+            }
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.4.0.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     </head>
     <body class="bg-light">
         <nav class="navbar navbar-secondary bg-secondary">
@@ -83,12 +95,12 @@
             </div>
         </nav>
 
-        <br><br><br>
+        <br>    
         <div id="buttokind" align="center">
             <button type="button" class="btn btn-success" onclick="show3X3()">簡單</button>
             <button type="button" class="btn btn-warning" onclick="show5X5()">普通</button>
             <button type="button" class="btn btn-danger" onclick="show10X10()">困難</button>
-            <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#customdiv">自訂</button> -->
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#customdiv">上傳圖片</button>
             <button type="button" class="btn btn-secondary" onclick="resetPuzzle()">重置</button>
         </div>
 
@@ -97,7 +109,8 @@
     <!-- <div align="center">
         <input type="file" name="imgupload" id="imgupload" accept="image/png,image/jpeg">
     </div> -->
-    <div class="input-group mb-3">
+<!--     <a>可選擇自己要的拼圖圖片或是不選擇使用預設圖片遊玩</a>
+    <div class="input-group mb-3" style="width:400px;">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
         </div>
@@ -105,7 +118,7 @@
             <input type="file" class="custom-file-input" id="imgupload" name="imgupload" aria-describedby="inputGroupFileAddon01" accept="image/PNG,image/jpeg">
             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
-    </div>
+    </div> -->
     <div class="puz" id="puz3X3" style="display: block;">
         <div id="p1" class="Puzzle bo3x3">
         </div>
@@ -384,50 +397,53 @@
         123
     </div> -->
 
+<!-- <div class="testdiv"></div> -->
 <!-- Modal -->
-    <!-- <div class="modal fade" id="customdiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal fade" id="customdiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle">自訂 - X*X方形拼圖</h5>
+                <h5 class="modal-title" id="exampleModalScrollableTitle" style="font-family: Microsoft JhengHei;">上傳圖片</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         <div class="modal-body">
             <div align="left">
-                <a>請輸入數字：</a>
+<!--                 <a>請輸入數字：</a>
                 <input type="number" name="puznumber" min="2" max="10" required="required">
-                <br>
-                <a>可選擇自己要的拼圖圖片或是不選擇使用預設圖片</a>
+                <br> -->
+                <div align="center">
+                    <a style="font-family: Microsoft JhengHei;">可選擇自己要的拼圖圖片或是不選擇使用預設圖片</a>
+                </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                     </div>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="imgupload" name="imgupload" aria-describedby="inputGroupFileAddon01" accept="image/PNG,image/jpeg">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        <label class="custom-file-label" for="inputGroupFile01">選擇圖片</label>
                     </div>
                 </div>
                 <br>
                 <a></a>
-                <img id="customdivimg" width="466px" height="466px" style="display: none;">
+                <img id="customdivimg" width="450" height="450px" style="display: none;">
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">確定</button>
+            <button type="button" class="btn btn-primary" onclick="okuploadimg()">確定</button>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
 
-    <footer class="page-footer navbar-secondary bg-secondary" id="footer" style="color: white">
+<!--     <footer class="page-footer navbar-secondary bg-secondary" id="footer" style="color: white;">
         <div class="footer-copyright text-center py-3">HTML5網頁程式設計期末專題：
             <span>16113241 鄒嘉安</span>
         </div>
-    </footer>
+    </footer> -->
     <script type="text/javascript">
 
     var drag_obj;
@@ -540,6 +556,7 @@
 
     //讀取後打亂拼圖
     window.onload=function(){
+        createpuz();
         resetPuzzle();
     }
     var puz3X3w = ["0px","-150px","-300px"];
@@ -552,9 +569,11 @@
     var arrPuzzle5X5 = [];
     var arrPuzzle10X10 = [];
     var imgurl = "background: url('.//1506964794-4efdd2f969559e8b1c92e99f32ded48e.jpg');";
+    var uploadimg = "";
 
-    for(var puz = 0,puzw = 0,puzh = 0;puz<9;puz++){
-        arrPuzzle3X3[puz] = "<div id='"+puz+"' class='img' draggable='true' style=\""+imgurl+"width:150px;height:150px;background-repeat: no-repeat;background-position:"+puz3X3w[puzw]+" "+puz3X3h[puzh]+"\"'></div>";
+    function createpuz() {
+        for(var puz = 0,puzw = 0,puzh = 0;puz<9;puz++){
+        arrPuzzle3X3[puz] = "<div id='"+puz+"' class='img' draggable='true' style=\""+imgurl+"width:150px;height:150px;background-repeat: no-repeat;background-position:"+puz3X3w[puzw]+" "+puz3X3h[puzh]+"\";background-size'></div>";
         // console.log(puzw);
         if(puzw == 2){
             puzh++;
@@ -565,30 +584,32 @@
             puzw = 0;
         }
     }
-    for(var puz = 0,puzw = 0,puzh = 0;puz<25;puz++){
-        arrPuzzle5X5[puz] = "<div id='"+puz+"' class='img' draggable='true' style=\""+imgurl+"width:90px;height:90px;background-repeat: no-repeat;background-position:"+puz5X5w[puzw]+" "+puz5X5h[puzh]+"\"'></div>";
-        // console.log(puzw);
-        if(puzw == 4){
-            puzh++;
+        for(var puz = 0,puzw = 0,puzh = 0;puz<25;puz++){
+            arrPuzzle5X5[puz] = "<div id='"+puz+"' class='img' draggable='true' style=\""+imgurl+"width:90px;height:90px;background-repeat: no-repeat;background-position:"+puz5X5w[puzw]+" "+puz5X5h[puzh]+"\"'></div>";
+            // console.log(puzw);
+            if(puzw == 4){
+                puzh++;
+            }
+            if(puzw != 4){
+                puzw++;
+            }else{
+                puzw = 0;
+            }
         }
-        if(puzw != 4){
-            puzw++;
-        }else{
-            puzw = 0;
+        for(var puz = 0,puzw = 0,puzh = 0;puz<100;puz++){
+            arrPuzzle10X10[puz] = "<div id='"+puz+"' class='img' draggable='true' style=\""+imgurl+"width:45px;height:45px;background-repeat: no-repeat;background-position:"+puz10X10w[puzw]+" "+puz10X10h[puzh]+"\"'></div>";
+            // console.log(puzw);
+            if(puzw == 9){
+                puzh++;
+            }
+            if(puzw != 9){
+                puzw++;
+            }else{
+                puzw = 0;
+            }
         }
     }
-    for(var puz = 0,puzw = 0,puzh = 0;puz<100;puz++){
-        arrPuzzle10X10[puz] = "<div id='"+puz+"' class='img' draggable='true' style=\""+imgurl+"width:45px;height:45px;background-repeat: no-repeat;background-position:"+puz10X10w[puzw]+" "+puz10X10h[puzh]+"\"'></div>";
-        // console.log(puzw);
-        if(puzw == 9){
-            puzh++;
-        }
-        if(puzw != 9){
-            puzw++;
-        }else{
-            puzw = 0;
-        }
-    }
+    
 
 
     // var arrPuzzle = [
@@ -662,17 +683,19 @@
         // console.log(file_content);
         if(!!file_content){
             if(imagearray.indexOf(file_content) < 0){
-                alert("檔案類型錯誤，只接受"+imagearray.toString());
+                // alert("檔案類型錯誤，只接受"+imagearray.toString());
+                Swal.fire("檔案類型錯誤，只接受"+imagearray.toString());
                 $(this).siblings(".custom-file-label").addClass("selected").html("Choose file");
                 $('#customdivimg').attr("style","display:none");
             }else{
-                // alert("讀取成功");
+                // Swal.fire("圖片選擇成功");
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
                 var file = $(this)[0].files[0];
                 var reader = new FileReader;
                 reader.onload = function(e) {
                     $('#customdivimg').attr('src', e.target.result);
+                    uploadimg = e.target.result;
                 };
                 reader.readAsDataURL(file);
                 $('#customdivimg').attr("style","display:block");
@@ -703,6 +726,24 @@
         $('#puz10X10').attr("style","display:block");
         size = 10;
         resetPuzzle();
+    }
+
+    function okuploadimg(){
+        if(uploadimg == ""){
+            // alert("你未選擇任何圖片");
+            Swal.fire({
+                type: 'error',
+                title: '錯誤',
+                text: '你尚未選擇任何圖片!!',
+            });
+        }else{
+            $('#customdiv').modal('hide');
+            imgurl = "background: url('"+uploadimg+"');"
+            createpuz();
+            resetPuzzle();
+            console.log(uploadimg);
+        }
+
     }
     </script>
   </body>
