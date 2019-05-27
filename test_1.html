@@ -57,7 +57,7 @@
             .puz{
                 position: absolute;
                 left:50%;
-                top: 10%;
+                top: 13%;
                 transform: translatex(-50%);
                 border-width: 1px;
                 border-color: black;
@@ -76,6 +76,23 @@
                 -webkit-background-size:contain;
                 -o-background-size:contain;*/
                 background-size:450px 450px;
+            }
+
+            .rank{
+                position: absolute;
+                left:0%;
+                top: 19%;
+                /* transform: translatex(5%); */
+                border-width: 1px;
+                border-color: black;
+                border-style: solid;
+                width: 200px;
+                height: 300px;
+                /* margin-top: 80px;  */
+            }
+
+            #timeshow{
+                font-size: 24px;
             }
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -102,6 +119,8 @@
             <button type="button" class="btn btn-danger" onclick="show10X10()">困難</button>
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#customdiv">上傳圖片</button>
             <button type="button" class="btn btn-secondary" onclick="resetPuzzle()">重置</button>
+            <br><br>
+            <p id="timeshow">［ 00：00：00 ］</p>
         </div>
 
 
@@ -119,6 +138,21 @@
             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
         </div>
     </div> -->
+    <div class="rank">
+        <p id="win" align="center">最快：</p>
+        <ul id="rk">
+            <!-- <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li> -->
+        </ul>
+    </div>
     <div class="puz" id="puz3X3" style="display: block;">
         <div id="p1" class="Puzzle bo3x3">
         </div>
@@ -427,7 +461,9 @@
                 </div>
                 <br>
                 <a></a>
-                <img id="customdivimg" width="450" height="450px" style="display: none;">
+                <div align="center">
+                    <img id="customdivimg" width="450" height="450px" style="display: none;">
+                </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -445,7 +481,9 @@
         </div>
     </footer> -->
     <script type="text/javascript">
-
+    var ranktimes = [];
+    var ranktime = [];
+    var ranki = 0;
     var drag_obj;
     // var dropzone = document.querySelectorAll(".Puzzle");
     var size = 3;
@@ -482,6 +520,7 @@
             dropzone[i].ondrop = function(event){
                 event.preventDefault();
                 if(event.target.className == "img" && drag_obj.parentNode != event.target.parentNode) {
+                    myFunction();
                     var a = drag_obj.parentNode;
                     drag_obj.parentNode.removeChild(drag_obj);
                     event.target.parentNode.appendChild(drag_obj);
@@ -510,6 +549,7 @@
                 dropzone[i].ondrop = function(event){
                     event.preventDefault();
                     if(event.target.className == "img" && drag_obj.parentNode != event.target.parentNode) {
+                        myFunction();
                         var a = drag_obj.parentNode;
                         drag_obj.parentNode.removeChild(drag_obj);
                         event.target.parentNode.appendChild(drag_obj);
@@ -538,7 +578,8 @@
                 }
                 dropzone[i].ondrop = function(event){
                     event.preventDefault();
-                    if(event.target.className == "img" && drag_obj.parentNode != event.target.parentNode) {
+                    if(event.target.className == "img" && drag_obj.parentNode != event.trget.parentNode) {
+                        myFunction();
                         var a = drag_obj.parentNode;
                         drag_obj.parentNode.removeChild(drag_obj);
                         event.target.parentNode.appendChild(drag_obj);
@@ -548,8 +589,16 @@
                 }
             }
         }
+        clearInterval(timeInterval);
+        showtime.innerHTML = "［ 00：00：00 ］";
+        trfa = true;
+        hour = 0;
+        min = 0;
+        sec = 0;
+        hourstr = "";
+        minstr = "";
+        secstr = "";
         // var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        
         // console.log(table);
     }
 
@@ -623,26 +672,24 @@
     //     "<div id='7' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -100px -200px\"'></div>",
     //     "<div id='8' class='img' draggable='true' style=\""+imgurl+"width:100px;height:100px;background-repeat: no-repeat;background-position: -200px -200px\"'></div>"
     //     ]
-    
+    var rankhtml = "";
     function checkPuzzle(){
-        // var arrimg = document.querySelectorAll(".img");
-        // console.log(arrimg);
         if(size == 3){
             var arrimg = document.querySelectorAll(".Puzzle");
-            // console.log(document.querySelectorAll(".Puzzle"));
-            // console.log(arrimg[1].childNodes[0].id)
         }else if(size == 5){
             arrimg = document.querySelectorAll(".Puzzle5X5");
         }else if(size == 10){
-
+            arrimg = document.querySelectorAll(".Puzzle10X10");
         }
         for(var i = 0;i<size*size;i++){
-            // console.log(arrimg[i].id);
-            // console.log(i);
-            // console.log("-----------");
             if(arrimg[i].childNodes[0].id != i){
                 break;
             }else if(arrimg.length-1 == i){
+                clearInterval(timeInterval);
+                ranktimes[ranki] = hour*3600 + min*60 + sec;
+                ranktime[ranki] =  "［ " + hourstr + "：" + minstr + "：" + secstr + " ］";
+                ranki++;
+                showrk();
                 alert("恭喜完成拼圖");
             }
         }
@@ -677,7 +724,7 @@
     //check上傳格式是不是圖片格式
     $(".custom-file-input").on("change", function() {
         // console.log($(this)[0].files[0]);
-        var imagearray = new Array(".jpg", ".png");
+        var imagearray = new Array(".jpg", ".png",".JPG");
         var file_content = $(this).val();//取檔案名
         file_content = file_content.substring(file_content.lastIndexOf('.'));
         // console.log(file_content);
@@ -703,7 +750,7 @@
         }
         // console.log($(this).val());
     });
-
+    //3X3顯示隱藏
     function show3X3(){
         $('#puz3X3').attr("style","display:block");
         $('#puz5X5').attr("style","display:none");
@@ -711,7 +758,7 @@
         size = 3;
         resetPuzzle();
     }
-
+    //5X5顯示隱藏
     function show5X5(){
         $('#puz3X3').attr("style","display:none");
         $('#puz5X5').attr("style","display:block");
@@ -719,7 +766,7 @@
         size = 5;
         resetPuzzle();
     }
-
+    //10X10顯示隱藏
     function show10X10(){
         $('#puz3X3').attr("style","display:none");
         $('#puz5X5').attr("style","display:none");
@@ -728,6 +775,7 @@
         resetPuzzle();
     }
 
+    //照片判斷
     function okuploadimg(){
         if(uploadimg == ""){
             // alert("你未選擇任何圖片");
@@ -745,6 +793,73 @@
         }
 
     }
+
+    //計時器
+    var showtime = document.getElementById("timeshow");
+    var hour = 0;
+    var min = 0;
+    var sec = 0;
+    var hourstr;
+    var minstr;
+    var secstr;
+    var trfa = true;
+    var timeInterval;
+    function myFunction() {
+        if(trfa){
+            timeInterval = setInterval(
+                function(){
+                    sec++;
+                    if(sec == 60){
+                        min++;
+                        sec -= 60;
+                    }
+                    if(min == 60){
+                        hour++;
+                        min -= 60;
+                    }
+                    if(hour < 10){
+                        hourstr = "0"+String(hour);
+                    }else{
+                        hourstr = String(hour);
+                    }
+                    if(min < 10){
+                        minstr = "0"+String(min);
+                    }else{
+                        minstr = String(min);
+                    }
+                    if(sec < 10){
+                        secstr = "0"+String(sec);
+                    }else{
+                        secstr = String(sec);
+                    }
+                    showtime.innerHTML = "［ " + hourstr + "：" + minstr + "：" + secstr + " ］";
+                    // console.log(sec);
+                }, 
+            1000);
+        }
+        trfa = false;
+    }
+    var minrk;
+    var minindex;
+    function showrk(){
+        rankhtml = "";
+        // minrk = ();
+        // console.log(minrk);
+        // console.log(ranktimes);
+        minrk = ranktimes[0];
+        for(var rankj = 0;rankj < ranktime.length; rankj++){
+            if((minrk > ranktimes[rankj+1]) && ranktime.length != 0){
+                minrk = ranktimes[rankj+1];
+            }
+            rankhtml += "<li>"+(rankj+1)+"."+ranktime[rankj]+"</li>";
+        }
+        document.getElementById("rk").innerHTML = rankhtml;
+        console.lg
+        var abc= ranktime.indexOf(Math.min(minrk));
+        console.log(abc);
+        document.getElementById("win").innerHTML = "最快："+ranktime[abc];
+    }
+
     </script>
   </body>
 </html>  
