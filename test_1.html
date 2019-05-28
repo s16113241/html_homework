@@ -83,18 +83,19 @@
                 left:0%;
                 top: 19%;
                 /* transform: translatex(5%); */
-                border-width: 1px;
+/*                border-width: 1px;
                 border-color: black;
-                border-style: solid;
+                border-style: solid;*/
                 width: 200px;
                 height: 300px;
                 /* margin-top: 80px;  */
             }
 
             #timeshow{
-                font-size: 24px;
+                font-size: 20px;
             }
         </style>
+        <link rel="icon" href=".\business.png" type="image/x-icon" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -119,7 +120,9 @@
             <button type="button" class="btn btn-danger" onclick="show10X10()">困難</button>
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#customdiv">上傳圖片</button>
             <button type="button" class="btn btn-secondary" onclick="resetPuzzle()">重置</button>
-            <br><br>
+            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#customdiv1" onclick="
+promptimg()">提示</button>
+            <br>
             <p id="timeshow">［ 00：00：00 ］</p>
         </div>
 
@@ -462,13 +465,39 @@
                 <br>
                 <a></a>
                 <div align="center">
-                    <img id="customdivimg" width="450" height="450px" style="display: none;">
+                    <img id="customdivimg" width="450px" height="450px" style="display: none;">
                 </div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="okuploadimg()">確定</button>
+            <button id="imgbtn" type="button" class="btn btn-primary" onclick="okuploadimg()" disabled="disabled">確定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="customdiv1" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle" style="font-family: Microsoft JhengHei;">圖片提示</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body">
+            <div align="left">
+                <br>
+                <a></a>
+                <div align="center">
+                    <img id="customdivimg1" width="400px" height="400px" style="display: block;">
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <!--   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="okuploadimg()">確定</button> -->
           </div>
         </div>
       </div>
@@ -607,9 +636,16 @@
     window.onload=function(){
         createpuz();
         resetPuzzle();
+        if(!!localStorage.minrk){
+            document.getElementById("win").innerHTML = "最快："+localStorage.minrk;
+        }else{
+            document.getElementById("win").innerHTML = "最快：無";
+        }
     }
+    // var puz3X3w = ["0px","-150px","-300px"];
     var puz3X3w = ["0px","-150px","-300px"];
     var puz3X3h = ["0px","-150px","-300px"];
+    // var puz3X3h = ["0px","-150px","-300px"];
     var puz5X5w = ["0px","-90px","-180px","-270px","-360px"];
     var puz5X5h = ["0px","-90px","-180px","-270px","-360px"];
     var puz10X10w = ["0px","-45px","-90px","-135px","-180px","-225px","-270px","-315px","-360px","-405px"];
@@ -618,6 +654,7 @@
     var arrPuzzle5X5 = [];
     var arrPuzzle10X10 = [];
     var imgurl = "background: url('.//1506964794-4efdd2f969559e8b1c92e99f32ded48e.jpg');";
+    var imgurl1 = ".//1506964794-4efdd2f969559e8b1c92e99f32ded48e.jpg";
     var uploadimg = "";
 
     function createpuz() {
@@ -690,7 +727,12 @@
                 ranktime[ranki] =  "［ " + hourstr + "：" + minstr + "：" + secstr + " ］";
                 ranki++;
                 showrk();
-                alert("恭喜完成拼圖");
+                Swal.fire({
+                    type: 'success',
+                    title: '恭喜',
+                    text: '完成拼圖!',
+                })
+                // alert("恭喜完成拼圖");
             }
         }
     }
@@ -726,23 +768,43 @@
         // console.log($(this)[0].files[0]);
         var imagearray = new Array(".jpg", ".png",".JPG");
         var file_content = $(this).val();//取檔案名
+        var imgwidth;
+        var imgheight;
+        var reader = new FileReader;
+        var img = new Image();
         file_content = file_content.substring(file_content.lastIndexOf('.'));
         // console.log(file_content);
         if(!!file_content){
             if(imagearray.indexOf(file_content) < 0){
-                // alert("檔案類型錯誤，只接受"+imagearray.toString());
                 Swal.fire("檔案類型錯誤，只接受"+imagearray.toString());
-                $(this).siblings(".custom-file-label").addClass("selected").html("Choose file");
+                $(this).siblings(".custom-file-label").addClass("selected").html("選擇圖片");
                 $('#customdivimg').attr("style","display:none");
             }else{
                 // Swal.fire("圖片選擇成功");
                 var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
                 var file = $(this)[0].files[0];
-                var reader = new FileReader;
+
+
                 reader.onload = function(e) {
-                    $('#customdivimg').attr('src', e.target.result);
-                    uploadimg = e.target.result;
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        imgwidth = this.width;
+                        imgheight = this.height;
+                        if(imgwidth == 450 && imgheight == 450){
+                            $("#imgupload").siblings(".custom-file-label").addClass("selected").html(fileName);
+                            // console.log(imgwidth+" "+imgheight);
+                            imgurl1 =  e.target.result;
+                            $('#customdivimg').attr('src', e.target.result);
+                            $('#imgbtn').removeAttr("disabled");
+                            uploadimg = e.target.result;
+                        }else{
+                            $("#imgupload").siblings(".custom-file-label").addClass("selected").html("選擇圖片");
+                            $('#customdivimg').attr("style","display:none");
+                            Swal.fire("圖片尺寸錯誤，只接受width:450px，height:450px");
+                            $('#imgbtn').attr("disabled","true");
+                        }
+                    }
+
                 };
                 reader.readAsDataURL(file);
                 $('#customdivimg').attr("style","display:block");
@@ -778,7 +840,6 @@
     //照片判斷
     function okuploadimg(){
         if(uploadimg == ""){
-            // alert("你未選擇任何圖片");
             Swal.fire({
                 type: 'error',
                 title: '錯誤',
@@ -843,9 +904,6 @@
     var minindex;
     function showrk(){
         rankhtml = "";
-        // minrk = ();
-        // console.log(minrk);
-        // console.log(ranktimes);
         minrk = ranktimes[0];
         for(var rankj = 0;rankj < ranktime.length; rankj++){
             if((minrk > ranktimes[rankj+1]) && ranktime.length != 0){
@@ -854,12 +912,14 @@
             rankhtml += "<li>"+(rankj+1)+"."+ranktime[rankj]+"</li>";
         }
         document.getElementById("rk").innerHTML = rankhtml;
-        console.lg
-        var abc= ranktime.indexOf(Math.min(minrk));
-        console.log(abc);
-        document.getElementById("win").innerHTML = "最快："+ranktime[abc];
+        localStorage.minrk = ranktime[ranktimes.indexOf(minrk)];
+        document.getElementById("win").innerHTML = "最快："+ranktime[ranktimes.indexOf(minrk)];
     }
 
+
+    function promptimg(){
+        $('#customdivimg1').attr('src', imgurl1);
+    }
     </script>
   </body>
 </html>  
