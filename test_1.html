@@ -636,11 +636,26 @@ promptimg()">提示</button>
     window.onload=function(){
         createpuz();
         resetPuzzle();
-        if(!!localStorage.minrk){
-            document.getElementById("win").innerHTML = "最快："+localStorage.minrk;
-        }else{
-            document.getElementById("win").innerHTML = "最快：無";
+        if(size == 3){
+            if(!!localStorage.minrk3x3){
+                document.getElementById("win").innerHTML = "最快："+localStorage.minrk3x3;
+            }else{
+                document.getElementById("win").innerHTML = "最快：無";
+            }
+        }else if(size == 5){
+            if(!!localStorage.minrk5x5){
+                document.getElementById("win").innerHTML = "最快："+localStorage.minrk5x5;
+            }else{
+                document.getElementById("win").innerHTML = "最快：無";
+            }
+        }else if(size == 10){
+            if(!!localStorage.minrk10x10){
+                document.getElementById("win").innerHTML = "最快："+localStorage.minrk10x10;
+            }else{
+                document.getElementById("win").innerHTML = "最快：無";
+            }
         }
+            
     }
     // var puz3X3w = ["0px","-150px","-300px"];
     var puz3X3w = ["0px","-150px","-300px"];
@@ -819,6 +834,11 @@ promptimg()">提示</button>
         $('#puz10X10').attr("style","display:none");
         size = 3;
         resetPuzzle();
+        if(!!localStorage.minrk3x3){
+            document.getElementById("win").innerHTML = "最快："+localStorage.minrk3x3;
+        }else{
+            document.getElementById("win").innerHTML = "最快：無";
+        }
     }
     //5X5顯示隱藏
     function show5X5(){
@@ -827,6 +847,11 @@ promptimg()">提示</button>
         $('#puz10X10').attr("style","display:none");
         size = 5;
         resetPuzzle();
+        if(!!localStorage.minrk5x5){
+            document.getElementById("win").innerHTML = "最快："+localStorage.minrk5x5;
+        }else{
+            document.getElementById("win").innerHTML = "最快：無";
+        }
     }
     //10X10顯示隱藏
     function show10X10(){
@@ -835,6 +860,11 @@ promptimg()">提示</button>
         $('#puz10X10').attr("style","display:block");
         size = 10;
         resetPuzzle();
+        if(!!localStorage.minrk10x10){
+            document.getElementById("win").innerHTML = "最快："+localStorage.minrk10x10;
+        }else{
+            document.getElementById("win").innerHTML = "最快：無";
+        }
     }
 
     //照片判斷
@@ -912,6 +942,13 @@ promptimg()">提示</button>
             rankhtml += "<li>"+(rankj+1)+"."+ranktime[rankj]+"</li>";
         }
         document.getElementById("rk").innerHTML = rankhtml;
+        if(size == 3){
+            localStorage.minrk3x3 = ranktime[ranktimes.indexOf(minrk)];
+        }else if(size == 5){
+            localStorage.minrk5x5 = ranktime[ranktimes.indexOf(minrk)];
+        }else if(size == 10){
+            localStorage.minrk10x10 = ranktime[ranktimes.indexOf(minrk)];
+        }
         localStorage.minrk = ranktime[ranktimes.indexOf(minrk)];
         document.getElementById("win").innerHTML = "最快："+ranktime[ranktimes.indexOf(minrk)];
     }
